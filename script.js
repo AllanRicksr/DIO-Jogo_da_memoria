@@ -32,8 +32,8 @@ let lightColor = (element, number) => {
 //chaca se os botoes foram precionados certos
 let checkOrder = () => {
     for (let i in clickedOrder) {
-        if (clickedOrder[i] != order { i }) {
-            lose();
+        if (clickedOrder[i] != order[i]) {
+            gameOver();
             break
         }
     }
@@ -47,9 +47,53 @@ let checkOrder = () => {
 let click = (color) => {
     clickedOrder[clickedOrder.length] = color;
     createColorElement(color).classlist.add('selected');
+
     setTimeout(() => {
         elementColor(color).classlist.remove('selected');
+        checkOrder();
     })
 
-    checkOrder();
+
 }
+
+//funcao que retorna a cor
+let createColorElement = (color) => {
+    if (color == 0) {
+        return green
+    } else if (color == 1) {
+        return red;
+    } else if (color == 2) {
+        return yellow;
+    } else if (color == 3) {
+        return blue;
+    }
+}
+
+//funcao prar proximo nivel
+let nextlevel = () => {
+        score++;
+        shuffleOrder();
+    }
+    //funcao para derrota
+let gamaOver = () => {
+    alert(`Pontuação: ${score}!\nVocê perdeu o jogo!\nClique em OK para iniciar um novo jogo`);
+    order = [];
+    clickedOrder = [];
+
+    playGame();
+}
+
+let playGame = () => {
+    alert('Bem vindo ao Gênesis! Iniciando novo jogo!');
+    score = 0;
+
+    nextlevel();
+
+}
+
+green.addEventListener('click'.click(0));
+red.addEventListener('click'.click(1));
+yellow.addEventListener('click'.click(2));
+blue.addEventListener('click'.click(3));
+
+playGame();
