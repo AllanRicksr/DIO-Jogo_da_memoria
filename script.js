@@ -6,6 +6,7 @@ const blue = document.querySelector('.blue');
 const red = document.querySelector('.red');
 const green = document.querySelector('.green');
 const yellow = document.querySelector('.yellow');
+
 //cria ordem aleatoria
 let shuffleOrder = () => {
     let colorOrder = Math.floor(Math.random() * 4);
@@ -20,12 +21,12 @@ let shuffleOrder = () => {
 
 //acende as cores
 let lightColor = (element, number) => {
-    time = time * 500;
+    number = number * 500;
     setTimeout(() => {
-        element.classlist.add('selected');
-    }, tempo);
+        element.classList.add('selected');
+    }, number);
     setTimeout(() => {
-        element.classlist.remove('');
+        element.classList.remove('selected');
     })
 }
 
@@ -46,10 +47,10 @@ let checkOrder = () => {
 //funcao clique do usuario
 let click = (color) => {
     clickedOrder[clickedOrder.length] = color;
-    createColorElement(color).classlist.add('selected');
+    createColorElement(color).classList.add('selected');
 
     setTimeout(() => {
-        elementColor(color).classlist.remove('selected');
+        createColorElement(color).classList.remove('selected');
         checkOrder();
     })
 
@@ -75,7 +76,7 @@ let nextlevel = () => {
         shuffleOrder();
     }
     //funcao para derrota
-let gamaOver = () => {
+let gameOver = () => {
     alert(`Pontuação: ${score}!\nVocê perdeu o jogo!\nClique em OK para iniciar um novo jogo`);
     order = [];
     clickedOrder = [];
@@ -83,17 +84,19 @@ let gamaOver = () => {
     playGame();
 }
 
+//funcao de inico de jogo
 let playGame = () => {
-    alert('Bem vindo ao Gênesis! Iniciando novo jogo!');
-    score = 0;
+        alert('Bem vindo ao Gênesis! Iniciando novo jogo!');
+        score = 0;
 
-    nextlevel();
+        nextlevel();
 
-}
+    }
+    //evento de clique
+green.onclick = () => click(0);
+red.onclick = () => click(1);
+yellow.onclick = () => click(2);
+blue.onclick = () => click(3);
 
-green.addEventListener('click'.click(0));
-red.addEventListener('click'.click(1));
-yellow.addEventListener('click'.click(2));
-blue.addEventListener('click'.click(3));
-
+//inicio do jogo
 playGame();
